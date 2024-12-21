@@ -18,18 +18,18 @@ else
 fi
 
 SCRIPT_DIR="$( cd "$( dirname "$(readlink -f "${BASH_SOURCE[0]}")" )" &> /dev/null && pwd )"
-REQURIED_PACKAGES=("mokutil" "openssl" "sbsigntool" "grub-efi-amd64-signed" "fwts")
+# REQURIED_PACKAGES=("mokutil" "openssl" "sbsigntool" "grub-efi-amd64-signed" "fwts")
 
-for dpkg in "${REQURIED_PACKAGES[@]}"; do
-    echo -n "Checking if ${dpkg} is installed..";
-    if ! dpkg -s "${dpkg}" | grep Status | grep -q installed; then
-        echo "Ubuntu package ${dpkg} is required before continuing"
-        echo "Install using: sudo apt install ${dpkg}"
-        exit 1
-    else
-        echo "[ OK ]"
-    fi
-done
+# for dpkg in "${REQURIED_PACKAGES[@]}"; do
+#     echo -n "Checking if ${dpkg} is installed..";
+#     if ! dpkg -s "${dpkg}" | grep Status | grep -q installed; then
+#         echo "Ubuntu package ${dpkg} is required before continuing"
+#         echo "Install using: sudo apt install ${dpkg}"
+#         exit 1
+#     else
+#         echo "[ OK ]"
+#     fi
+# done
 
 echo "
 ########
@@ -106,7 +106,7 @@ You will need to type the password used during this enroll process to successful
                 [Yy])
                 echo "Rebooting system.."
                 sleep 2
-                shutdown -r now
+                reboot
                 ;;
                 *)
                 read -rp "Manually reboot to finish the MOK enrollment" _response
